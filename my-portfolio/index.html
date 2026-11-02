@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abdelrahman Mohamed | Data Analyst & Software Tester</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            cyan: '#06b6d4',
+                            blue: '#3b82f6',
+                            purple: '#8b5cf6',
+                            dark: '#080d16',
+                            card: '#111827',
+                            border: '#1f2937'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #070b14;
+            color: #f3f4f6;
+        }
+        .glass-card {
+            background: rgba(17, 24, 39, 0.75);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-card:hover {
+            border-color: rgba(6, 182, 212, 0.4);
+            box-shadow: 0 0 30px -5px rgba(6, 182, 212, 0.15);
+        }
+        .glow-cyan {
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
+        }
+        .glow-green {
+            box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #080d16;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1f2937;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #06b6d4;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-cyan-500 selection:text-white">
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="glass-card px-5 py-3 rounded-xl flex items-center gap-3 border border-cyan-500/50 text-white shadow-2xl">
+            <i class="fas fa-check-circle text-cyan-400 text-lg"></i>
+            <span id="toast-msg" class="text-sm font-medium">Copied to clipboard!</span>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 w-full z-40 glass-card bg-opacity-80 border-b border-gray-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="#" class="flex items-center gap-2.5 group">
+                    <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-white font-bold text-base shadow-lg group-hover:scale-105 transition-transform">
+                        AM
+                    </div>
+                    <span class="font-bold text-lg tracking-tight text-white">Abdelrahman<span class="text-cyan-400">.M</span></span>
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8 text-sm font-medium text-gray-300">
+                    <a href="#about" class="hover:text-cyan-400 transition-colors">About</a>
+                    <a href="#services" class="hover:text-cyan-400 transition-colors">Services</a>
+                    <a href="#skills" class="hover:text-cyan-400 transition-colors">Skills</a>
+                    <a href="#projects" class="hover:text-cyan-400 transition-colors">Projects</a>
+                    <a href="#experience" class="hover:text-cyan-400 transition-colors">Experience</a>
+                </div>
+
+                <div class="hidden md:flex items-center gap-3">
+                    <a href="https://wa.me/201276286768" target="_blank" class="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-medium text-sm hover:opacity-90 transition-all glow-green flex items-center gap-2">
+                        <i class="fab fa-whatsapp text-lg"></i>
+                        <span>Hire Me</span>
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" type="button" class="text-gray-300 hover:text-white p-2">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Nav Drodown -->
+        <div id="mobile-menu" class="hidden md:hidden glass-card border-t border-gray-800 px-4 pt-3 pb-6 space-y-3">
+            <a href="#about" class="block text-gray-300 hover:text-cyan-400 py-1.5 font-medium">About</a>
+            <a href="#services" class="block text-gray-300 hover:text-cyan-400 py-1.5 font-medium">Services</a>
+            <a href="#skills" class="block text-gray-300 hover:text-cyan-400 py-1.5 font-medium">Skills</a>
+            <a href="#projects" class="block text-gray-300 hover:text-cyan-400 py-1.5 font-medium">Projects</a>
+            <a href="#experience" class="block text-gray-300 hover:text-cyan-400 py-1.5 font-medium">Experience</a>
+            <div class="pt-2">
+                <a href="https://wa.me/201276286768" target="_blank" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-semibold text-sm flex items-center justify-center gap-2">
+                    <i class="fab fa-whatsapp text-lg"></i> Hire Me on WhatsApp
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="about" class="pt-32 pb-20 md:pt-40 md:pb-28 relative overflow-hidden">
+        <!-- Ambient Glowing Orbs -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="absolute top-1/3 right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <div class="lg:col-span-7 text-center lg:text-left space-y-6">
+                    <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full glass-card border border-cyan-500/30 text-cyan-400 text-xs font-semibold tracking-wide uppercase">
+                        <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+                        Available for Freelance Projects
+                    </div>
+
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
+                        Hi, I'm <br class="hidden sm:inline" />
+                        <span class="text-gradient">Abdelrahman Mohamed</span>
+                    </h1>
+
+                    <p class="text-xl font-medium text-cyan-300">
+                        Data Analyst & Software Tester
+                    </p>
+
+                    <p class="text-gray-300 text-base sm:text-lg max-w-2xl leading-relaxed mx-auto lg:mx-0">
+                        Third-year student at the <span class="text-white font-semibold underline decoration-cyan-500/50">Faculty of Computing and Data Science</span>. Specialized in crafting interactive data dashboards, extracting business intelligence, and conducting comprehensive software QA & manual testing.
+                    </p>
+
+                    <!-- CTAs & Direct Contacts -->
+                    <div class="pt-4 flex flex-wrap justify-center lg:justify-start gap-4 items-center">
+                        <a href="https://wa.me/201276286768" target="_blank" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-semibold text-sm hover:opacity-95 transition-all glow-green flex items-center gap-2.5">
+                            <i class="fab fa-whatsapp text-xl"></i>
+                            <span>Chat on WhatsApp</span>
+                        </a>
+
+                        <a href="https://www.linkedin.com/in/abdelrahman-mohamed-391508357" target="_blank" class="px-6 py-3.5 rounded-xl glass-card text-gray-200 hover:text-white font-semibold text-sm hover:bg-gray-800/80 transition-all flex items-center gap-2.5 border border-gray-700">
+                            <i class="fab fa-linkedin text-xl text-cyan-400"></i>
+                            <span>LinkedIn Profile</span>
+                        </a>
+
+                        <button onclick="copyToClipboard('+201276286768', 'Phone number copied!')" class="p-3.5 rounded-xl glass-card text-gray-300 hover:text-cyan-400 transition-all border border-gray-700 hover:border-cyan-500/40" title="Copy Phone Number">
+                            <i class="fas fa-phone text-base"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Hero Visual Box -->
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="relative w-full max-w-md glass-card rounded-3xl p-6 sm:p-8 space-y-6 border border-gray-800">
+                        <div class="flex items-center justify-between border-b border-gray-800 pb-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-cyan-500/20 to-blue-500/20 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-2xl">
+                                    <i class="fas fa-user-check"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-white text-base">Client Services</h3>
+                                    <p class="text-xs text-cyan-400">Ready to Hire</p>
+                                </div>
+                            </div>
+                            <span class="px-2.5 py-1 rounded-md bg-emerald-500/10 text-emerald-400 text-xs font-semibold border border-emerald-500/20">Active</span>
+                        </div>
+
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between p-3 rounded-xl bg-gray-900/60 border border-gray-800/80 text-xs">
+                                <span class="text-gray-400 flex items-center gap-2"><i class="fas fa-chart-line text-cyan-400"></i> Data Visualizations</span>
+                                <span class="text-gray-200 font-medium">Power BI / Excel</span>
+                            </div>
+                            <div class="flex items-center justify-between p-3 rounded-xl bg-gray-900/60 border border-gray-800/80 text-xs">
+                                <span class="text-gray-400 flex items-center gap-2"><i class="fas fa-bug text-purple-400"></i> Software QA & Test Cases</span>
+                                <span class="text-gray-200 font-medium">Manual Testing</span>
+                            </div>
+                            <div class="flex items-center justify-between p-3 rounded-xl bg-gray-900/60 border border-gray-800/80 text-xs">
+                                <span class="text-gray-400 flex items-center gap-2"><i class="fas fa-database text-emerald-400"></i> Data Entry & Copying</span>
+                                <span class="text-gray-200 font-medium">High Precision</span>
+                            </div>
+                            <div class="flex items-center justify-between p-3 rounded-xl bg-gray-900/60 border border-gray-800/80 text-xs">
+                                <span class="text-gray-400 flex items-center gap-2"><i class="fas fa-globe text-pink-400"></i> Languages</span>
+                                <span class="text-gray-200 font-medium">Translation</span>
+                            </div>
+                        </div>
+
+                        <div class="pt-2 text-center border-t border-gray-800/80">
+                            <p class="text-xs text-gray-400">Faculty of Computing and Data Science • Year 3</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-16 bg-gray-950/50 border-y border-gray-800/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center space-y-3 mb-12">
+                <h2 class="text-3xl font-extrabold text-white sm:text-4xl">Freelance Services</h2>
+                <p class="text-gray-400 text-sm sm:text-base max-w-xl mx-auto">High-quality services tailored for business operations, data clarity, and software quality.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Data Analysis Card -->
+                <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-cyan-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-2xl">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white">Data Analysis & BI</h3>
+                    <p class="text-sm text-gray-300 leading-relaxed">Transforming messy data into clean, structured insights and executive dashboards with Power BI, Excel, and Python.</p>
+                    <ul class="text-xs text-gray-400 space-y-2 pt-2 border-t border-gray-800">
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-cyan-400"></i> KPI & Performance Dashboards</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-cyan-400"></i> Sales & Profitability Analysis</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-cyan-400"></i> Data Cleaning & Transformation</li>
+                    </ul>
+                </div>
+
+                <!-- Software Testing Card -->
+                <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-purple-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-2xl">
+                        <i class="fas fa-vial"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white">Manual Software Testing</h3>
+                    <p class="text-sm text-gray-300 leading-relaxed">Rigorous end-to-end manual testing, scenario drafting, bug logging, and payment gateway flow verification.</p>
+                    <ul class="text-xs text-gray-400 space-y-2 pt-2 border-t border-gray-800">
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-purple-400"></i> Detailed Test Suite Creation</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-purple-400"></i> Payment Gateway Testing</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-purple-400"></i> Bug Reporting & UX Audits</li>
+                    </ul>
+                </div>
+
+                <!-- Data Entry & Translation Card -->
+                <div class="glass-card p-6 rounded-2xl space-y-4 hover:border-emerald-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-2xl">
+                        <i class="fas fa-file-invoice"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white">Data Operations & Translation</h3>
+                    <p class="text-sm text-gray-300 leading-relaxed">Fast, accurate data transcription, data copying between platforms, and precise language translation services.</p>
+                    <ul class="text-xs text-gray-400 space-y-2 pt-2 border-t border-gray-800">
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-emerald-400"></i> Accurate Data Entry & Copying</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-emerald-400"></i> Spreadsheet Formatting & Structuring</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-emerald-400"></i> Multi-language Translation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center space-y-3 mb-12">
+                <h2 class="text-3xl font-extrabold text-white sm:text-4xl">Technical Skills</h2>
+                <p class="text-gray-400 text-sm sm:text-base max-w-xl mx-auto">Technologies and core capabilities I utilize in projects.</p>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                <!-- Python -->
+                <div class="glass-card p-5 rounded-2xl flex items-center gap-4 hover:border-cyan-500/50 transition-all">
+                    <div class="w-11 h-11 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center text-2xl">
+                        <i class="fab fa-python"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-white text-base">Python</h4>
+                        <span class="text-xs text-gray-400">Data & Scripts</span>
+                    </div>
+                </div>
+
+                <!-- Power BI -->
+                <div class="glass-card p-5 rounded-2xl flex items-center gap-4 hover:border-yellow-500/50 transition-all">
+                    <div class="w-11 h-11 rounded-xl bg-yellow-500/10 text-yellow-400 flex items-center justify-center text-2xl">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-white text-base">Power BI</h4>
+                        <span class="text-xs text-gray-400">Dashboards & DAX</span>
+                    </div>
+                </div>
+
+                <!-- Excel -->
+                <div class="glass-card p-5 rounded-2xl flex items-center gap-4 hover:border-emerald-500/50 transition-all">
+                    <div class="w-11 h-11 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-2xl">
+                        <i class="fas fa-file-excel"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-white text-base">Excel</h4>
+                        <span class="text-xs text-gray-400">Formulas & Analysis</span>
+                    </div>
+                </div>
+
+                <!-- Manual Testing -->
+                <div class="glass-card p-5 rounded-2xl flex items-center gap-4 hover:border-purple-500/50 transition-all">
+                    <div class="w-11 h-11 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-2xl">
+                        <i class="fas fa-bug"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-white text-base">Manual Testing</h4>
+                        <span class="text-xs text-gray-400">Test Cases & QA</span>
+                    </div>
+                </div>
+
+                <!-- Data Entry -->
+                <div class="glass-card p-5 rounded-2xl flex items-center gap-4 hover:border-cyan-500/50 transition-all">
+                    <div class="w-11 h-11 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-2xl">
+                        <i class="fas fa-keyboard"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-white text-base">Data Entry</h4>
+                        <span class="text-xs text-gray-400">High Speed & Precision</span>
+                    </div>
+                </div>
+
+                <!-- Data Copying -->
+                <div class="glass-card p-5 rounded-2xl flex items-center gap-4 hover:border-indigo-500/50 transition-all">
+                    <div class="w-11 h-11 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center text-2xl">
+                        <i class="fas fa-copy"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-white text-base">Data Copying</h4>
+                        <span class="text-xs text-gray-400">Migration & Formats</span>
+                    </div>
+                </div>
+
+                <!-- Translation -->
+                <div class="glass-card p-5 rounded-2xl flex items-center gap-4 hover:border-pink-500/50 transition-all">
+                    <div class="w-11 h-11 rounded-xl bg-pink-500/10 text-pink-400 flex items-center justify-center text-2xl">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-white text-base">Translation</h4>
+                        <span class="text-xs text-gray-400">Arabic & English</span>
+                    </div>
+                </div>
+
+                <!-- Faculty Specialization -->
+                <div class="glass-card p-5 rounded-2xl flex items-center gap-4 border border-cyan-500/30">
+                    <div class="w-11 h-11 rounded-xl bg-cyan-500/20 text-cyan-300 flex items-center justify-center text-2xl">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-white text-base">Academic Degree</h4>
+                        <span class="text-xs text-cyan-400">Computing & Data</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-gray-950/70 border-t border-gray-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center space-y-3 mb-10">
+                <h2 class="text-3xl font-extrabold text-white sm:text-4xl">Featured Projects</h2>
+                <p class="text-gray-400 text-sm sm:text-base max-w-xl mx-auto">Explore my real-world Data Analysis dashboard and QA Software Testing work.</p>
+            </div>
+
+            <!-- Tab Filters -->
+            <div class="flex justify-center mb-10">
+                <div class="inline-flex p-1.5 rounded-xl glass-card border border-gray-800 gap-1">
+                    <button id="tab-all" onclick="filterProjects('all')" class="tab-btn active px-5 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md">All Projects</button>
+                    <button id="tab-data" onclick="filterProjects('data')" class="tab-btn px-5 py-2.5 rounded-lg text-xs sm:text-sm font-medium transition-all text-gray-400 hover:text-white">Data Analysis</button>
+                    <button id="tab-qa" onclick="filterProjects('qa')" class="tab-btn px-5 py-2.5 rounded-lg text-xs sm:text-sm font-medium transition-all text-gray-400 hover:text-white">Software Testing</button>
+                </div>
+            </div>
+
+            <!-- Projects Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+                <!-- Project 1: Power BI Store Analysis (Custom Replicated Visual Mockup matching user image) -->
+                <div class="project-card data-project lg:col-span-2 glass-card rounded-2xl overflow-hidden flex flex-col justify-between border border-gray-800 transition-all duration-300">
+                    <div class="p-4 sm:p-5">
+                        
+                        <!-- Header badge -->
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 rounded-full bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 text-xs font-semibold flex items-center gap-1.5">
+                                <i class="fas fa-chart-line"></i> Power BI Dashboard
+                            </span>
+                            <span class="text-xs text-gray-400">Data Analytics Project</span>
+                        </div>
+
+                        <!-- REPLICATED POWER BI DESKTOP DASHBOARD MOCKUP -->
+                        <div class="w-full bg-[#0b1329] rounded-xl border border-blue-900/60 p-3 sm:p-4 shadow-2xl overflow-hidden font-sans">
+                            <!-- Power BI Top Bar -->
+                            <div class="flex items-center justify-between border-b border-blue-900/60 pb-2 mb-3 text-[11px] text-gray-300">
+                                <div class="flex items-center gap-3">
+                                    <span class="font-semibold text-white flex items-center gap-1.5">
+                                        <i class="fas fa-desktop text-yellow-400"></i> Store Performance Dashboard
+                                    </span>
+                                </div>
+                                <div class="flex items-center gap-2 text-gray-400 text-[10px]">
+                                    <span>Visualizations</span> | <span>Data Pane</span>
+                                </div>
+                            </div>
+
+                            <!-- Dashboard KPI Row -->
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mb-3">
+                                <div class="bg-[#131e3a] p-2.5 rounded border border-blue-500/20">
+                                    <div class="text-xl sm:text-2xl font-extrabold text-white">2.30M</div>
+                                    <div class="text-[10px] text-gray-400 font-medium">Total Sales</div>
+                                </div>
+                                <div class="bg-[#131e3a] p-2.5 rounded border border-blue-500/20">
+                                    <div class="text-xl sm:text-2xl font-extrabold text-white">286.40K</div>
+                                    <div class="text-[10px] text-gray-400 font-medium">Total Profit</div>
+                                </div>
+                                <div class="bg-[#131e3a] p-2.5 rounded border border-blue-500/20">
+                                    <div class="text-xl sm:text-2xl font-extrabold text-white">12.47</div>
+                                    <div class="text-[10px] text-gray-400 font-medium">Profit Margin %</div>
+                                </div>
+                                <div class="bg-[#131e3a] p-2.5 rounded border border-blue-500/20">
+                                    <div class="text-xl sm:text-2xl font-extrabold text-white">296</div>
+                                    <div class="text-[10px] text-gray-400 font-medium">Count of Returned</div>
+                                </div>
+                            </div>
+
+                            <!-- Dashboard Visuals Grid -->
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                                
+                                <!-- Sum of Sales by Year (Line Chart SVG) -->
+                                <div class="bg-[#131e3a] p-2.5 rounded border border-blue-500/20">
+                                    <div class="text-[11px] font-semibold text-gray-200 mb-2">Sum of Sales by Year</div>
+                                    <svg class="w-full h-24 overflow-visible" viewBox="0 0 100 50">
+                                        <!-- Grid lines -->
+                                        <line x1="0" y1="10" x2="100" y2="10" stroke="#1f2d52" stroke-width="0.5"/>
+                                        <line x1="0" y1="30" x2="100" y2="30" stroke="#1f2d52" stroke-width="0.5"/>
+                                        <line x1="0" y1="45" x2="100" y2="45" stroke="#1f2d52" stroke-width="0.5"/>
+                                        <!-- Trend line -->
+                                        <polyline fill="none" stroke="#00d2ff" stroke-width="2" points="5,35 35,37 65,22 95,8" />
+                                        <circle cx="5" cy="35" r="1.5" fill="#00d2ff"/>
+                                        <circle cx="35" cy="37" r="1.5" fill="#00d2ff"/>
+                                        <circle cx="65" cy="22" r="1.5" fill="#00d2ff"/>
+                                        <circle cx="95" cy="8" r="1.5" fill="#00d2ff"/>
+                                    </svg>
+                                    <div class="flex justify-between text-[8px] text-gray-400 mt-1">
+                                        <span>2016</span><span>2017</span><span>2018</span><span>2019</span>
+                                    </div>
+                                </div>
+
+                                <!-- Sum of Sales by Category (Pie Chart SVG) -->
+                                <div class="bg-[#131e3a] p-2.5 rounded border border-blue-500/20">
+                                    <div class="text-[11px] font-semibold text-gray-200 mb-1">Sum of Sales by Category</div>
+                                    <div class="flex items-center justify-between">
+                                        <svg class="w-16 h-16" viewBox="0 0 36 36">
+                                            <!-- Blue pie slice 36.4% -->
+                                            <circle cx="18" cy="18" r="15.9" fill="transparent" stroke="#0091ff" stroke-width="12" stroke-dasharray="36.4 63.6" stroke-dashoffset="25"></circle>
+                                            <!-- Light Cyan pie slice 32.3% -->
+                                            <circle cx="18" cy="18" r="15.9" fill="transparent" stroke="#00d2ff" stroke-width="12" stroke-dasharray="32.3 67.7" stroke-dashoffset="88.6"></circle>
+                                            <!-- Dark Navy pie slice 31.3% -->
+                                            <circle cx="18" cy="18" r="15.9" fill="transparent" stroke="#003b8e" stroke-width="12" stroke-dasharray="31.3 68.7" stroke-dashoffset="56.3"></circle>
+                                        </svg>
+                                        <div class="text-[8px] space-y-1 text-gray-300 pl-1">
+                                            <div class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-[#0091ff]"></span> Tech (36.4%)</div>
+                                            <div class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-[#00d2ff]"></span> Furn (32.3%)</div>
+                                            <div class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-[#003b8e]"></span> Supp (31.3%)</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Sum of Sales by Region (Bar Chart SVG) -->
+                                <div class="bg-[#131e3a] p-2.5 rounded border border-blue-500/20">
+                                    <div class="text-[11px] font-semibold text-gray-200 mb-2">Sum of Sales by Region</div>
+                                    <div class="h-20 flex items-end justify-between gap-1.5 px-2">
+                                        <div class="w-1/4 bg-[#0070f3] rounded-t" style="height: 90%" title="West"></div>
+                                        <div class="w-1/4 bg-[#0070f3] rounded-t" style="height: 78%" title="East"></div>
+                                        <div class="w-1/4 bg-[#0070f3] rounded-t" style="height: 55%" title="Central"></div>
+                                        <div class="w-1/4 bg-[#0070f3] rounded-t" style="height: 42%" title="South"></div>
+                                    </div>
+                                    <div class="flex justify-between text-[8px] text-gray-400 mt-1">
+                                        <span>West</span><span>East</span><span>Cent</span><span>South</span>
+                                    </div>
+                                </div>
+
+                                <!-- Sum of Sales by Segment -->
+                                <div class="bg-[#131e3a] p-2.5 rounded border border-blue-500/20">
+                                    <div class="text-[11px] font-semibold text-gray-200 mb-2">Sum of Sales by Segment</div>
+                                    <div class="space-y-1.5">
+                                        <div>
+                                            <div class="text-[8px] text-gray-400 flex justify-between"><span>Consumer</span><span>1.16M</span></div>
+                                            <div class="w-full bg-gray-800 h-2 rounded overflow-hidden mt-0.5">
+                                                <div class="bg-[#0070f3] h-full" style="width: 85%"></div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="text-[8px] text-gray-400 flex justify-between"><span>Corporate</span><span>0.71M</span></div>
+                                            <div class="w-full bg-gray-800 h-2 rounded overflow-hidden mt-0.5">
+                                                <div class="bg-[#0070f3] h-full" style="width: 55%"></div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="text-[8px] text-gray-400 flex justify-between"><span>Home Office</span><span>0.43M</span></div>
+                                            <div class="w-full bg-gray-800 h-2 rounded overflow-hidden mt-0.5">
+                                                <div class="bg-[#0070f3] h-full" style="width: 35%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Total Sales by Profitability Category (Donut) -->
+                                <div class="bg-[#131e3a] p-2.5 rounded border border-blue-500/20 sm:col-span-2">
+                                    <div class="text-[11px] font-semibold text-gray-200 mb-1">Total Sales by Profitability Category</div>
+                                    <div class="flex items-center justify-around">
+                                        <svg class="w-16 h-16" viewBox="0 0 36 36">
+                                            <!-- High Profit (78.39%) -->
+                                            <circle cx="18" cy="18" r="15.9" fill="transparent" stroke="#003b8e" stroke-width="7" stroke-dasharray="78.4 21.6" stroke-dashoffset="25"></circle>
+                                            <!-- Losing (20.4%) -->
+                                            <circle cx="18" cy="18" r="15.9" fill="transparent" stroke="#00d2ff" stroke-width="7" stroke-dasharray="20.4 79.6" stroke-dashoffset="46.6"></circle>
+                                        </svg>
+                                        <div class="text-[9px] space-y-1 text-gray-300">
+                                            <div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#003b8e]"></span> High Profit (78.39% - 1.8M)</div>
+                                            <div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#00d2ff]"></span> Losing (20.4% - 0.47M)</div>
+                                            <div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-sky-400"></span> No Profit</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- Card Description -->
+                        <div class="mt-4 space-y-2">
+                            <h3 class="text-xl font-bold text-white">Store Sales & Profitability Analysis</h3>
+                            <p class="text-sm text-gray-300 leading-relaxed">
+                                End-to-end Power BI report tracking revenue trends ($2.30M Total Sales), profit margins (12.47%), product category breakdowns, regional performance, and return rates for retail decision-making.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-gray-900/60 border-t border-gray-800/80 flex flex-wrap items-center justify-between gap-2">
+                        <div class="flex flex-wrap gap-1.5">
+                            <span class="px-2.5 py-1 rounded bg-gray-800 text-gray-300 text-xs">Power BI</span>
+                            <span class="px-2.5 py-1 rounded bg-gray-800 text-gray-300 text-xs">DAX</span>
+                            <span class="px-2.5 py-1 rounded bg-gray-800 text-gray-300 text-xs">Excel</span>
+                            <span class="px-2.5 py-1 rounded bg-gray-800 text-gray-300 text-xs">Data Modeling</span>
+                        </div>
+                        <a href="https://wa.me/201276286768?text=Hi%20Abdelrahman,%20I'd%20like%20to%20discuss%20a%20Data%20Analysis%20project" target="_blank" class="px-3.5 py-1.5 rounded-lg bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 text-xs font-semibold hover:bg-cyan-500 hover:text-white transition-all flex items-center gap-1.5">
+                            <i class="fab fa-whatsapp"></i> Inquire About BI
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 2: Payment Manual Test Cases (SharePoint Link Included) -->
+                <div class="project-card qa-project glass-card rounded-2xl overflow-hidden flex flex-col justify-between border border-gray-800 transition-all duration-300">
+                    <div class="p-5 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20 text-xs font-semibold flex items-center gap-1.5">
+                                <i class="fas fa-check-square"></i> Manual Test Suite
+                            </span>
+                            <span class="text-xs text-gray-400">SharePoint Doc</span>
+                        </div>
+
+                        <div class="h-44 rounded-xl bg-gradient-to-br from-purple-950/40 to-gray-900 border border-purple-900/40 p-5 flex flex-col justify-between">
+                            <div class="flex justify-between items-start">
+                                <div class="w-10 h-10 rounded-lg bg-purple-500/20 text-purple-300 flex items-center justify-center text-xl">
+                                    <i class="fas fa-credit-card"></i>
+                                </div>
+                                <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 text-[10px] font-semibold border border-emerald-500/30">Verified Live</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-base">Payment Gateway Test Cases</h4>
+                                <p class="text-xs text-gray-400 mt-1">Positive, Negative, Boundary & Exception Test Scenarios</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-2">
+                            <h3 class="text-lg font-bold text-white">Payment Manual Test Suite</h3>
+                            <p class="text-sm text-gray-300 leading-relaxed">
+                                Comprehensive spreadsheet outlining structured test cases for online payment gateway integration—covering transaction validation, card authorization, error handling, and security edge cases.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-gray-900/60 border-t border-gray-800/80 space-y-3">
+                        <div class="flex flex-wrap gap-1.5">
+                            <span class="px-2.5 py-1 rounded bg-gray-800 text-gray-300 text-xs">Manual Testing</span>
+                            <span class="px-2.5 py-1 rounded bg-gray-800 text-gray-300 text-xs">Test Cases</span>
+                            <span class="px-2.5 py-1 rounded bg-gray-800 text-gray-300 text-xs">QA Execution</span>
+                        </div>
+
+                        <!-- User direct SharePoint Link -->
+                        <a href="https://alexuuni-my.sharepoint.com/:x:/g/personal/cds_abdelrahmanmohamed250216_alexu_edu_eg/IQCTZ9kdhlX6QIcnL9pkfh88AUH9dBtmpzzzw6DjcSIOr-M?rtime=HAyLc1M030g" target="_blank" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold text-xs flex items-center justify-center gap-2 hover:opacity-90 transition-all shadow-lg">
+                            <i class="fas fa-external-link-alt text-xs"></i>
+                            <span>View Payment Test Cases Sheet</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 3: Test IO Testing -->
+                <div class="project-card qa-project glass-card rounded-2xl overflow-hidden flex flex-col justify-between border border-gray-800 transition-all duration-300">
+                    <div class="p-5 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-semibold flex items-center gap-1.5">
+                                <i class="fas fa-bug"></i> QA Platform
+                            </span>
+                            <span class="text-xs text-gray-400">Crowdtesting</span>
+                        </div>
+
+                        <div class="h-44 rounded-xl bg-gradient-to-br from-emerald-950/40 to-gray-900 border border-emerald-900/40 p-5 flex flex-col justify-between">
+                            <div class="flex justify-between items-start">
+                                <div class="w-10 h-10 rounded-lg bg-emerald-500/20 text-emerald-300 flex items-center justify-center text-xl">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <span class="px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-400 text-[10px] font-semibold border border-cyan-500/30">Active Tester</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-base">Test IO Global QA</h4>
+                                <p class="text-xs text-gray-400 mt-1">Exploratory & Functional Testing</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-2">
+                            <h3 class="text-lg font-bold text-white">Test IO Testing Projects</h3>
+                            <p class="text-sm text-gray-300 leading-relaxed">
+                                Practical manual testing across real-world web and mobile applications under Test IO campaigns. Executing exploratory test cycles, reporting functional bugs with clear steps, and verifying fixes.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-gray-900/60 border-t border-gray-800/80 flex items-center justify-between">
+                        <div class="flex flex-wrap gap-1.5">
+                            <span class="px-2.5 py-1 rounded bg-gray-800 text-gray-300 text-xs">Test IO</span>
+                            <span class="px-2.5 py-1 rounded bg-gray-800 text-gray-300 text-xs">Bug Logging</span>
+                            <span class="px-2.5 py-1 rounded bg-gray-800 text-gray-300 text-xs">Cross-Device</span>
+                        </div>
+                        <a href="https://wa.me/201276286768?text=Hi%20Abdelrahman,%20I'd%20like%20to%20discuss%20a%20Software%20Testing%20project" target="_blank" class="px-3 py-1.5 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-xs font-semibold hover:bg-emerald-500 hover:text-white transition-all">
+                            Hire QA
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience & Training Section -->
+    <section id="experience" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center space-y-3 mb-14">
+                <h2 class="text-3xl font-extrabold text-white sm:text-4xl">Experience & Training</h2>
+                <p class="text-gray-400 text-sm sm:text-base max-w-xl mx-auto">Formal training and specialized academic foundation.</p>
+            </div>
+
+            <div class="max-w-3xl mx-auto relative border-l-2 border-gray-800 pl-6 sm:pl-8 space-y-10">
+                
+                <!-- DEPI Software Tester Graduate -->
+                <div class="relative group">
+                    <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-5 h-5 rounded-full bg-purple-500 border-4 border-gray-950 group-hover:scale-125 transition-transform glow-purple"></div>
+                    <div class="glass-card p-6 rounded-2xl border border-gray-800 space-y-2">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <h3 class="text-xl font-bold text-white">DEPI Software Tester Graduate</h3>
+                            <span class="px-3 py-1 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/30 text-xs font-semibold">Certified Training</span>
+                        </div>
+                        <p class="text-sm font-medium text-cyan-400">Digital Egypt Pioneers Initiative (DEPI)</p>
+                        <p class="text-sm text-gray-300 leading-relaxed pt-1">
+                            Graduated from specialized software testing track covering software QA methodologies, manual test case design, defect life cycle management, regression testing, and quality standards.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Data Analyst Trainee -->
+                <div class="relative group">
+                    <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-5 h-5 rounded-full bg-cyan-500 border-4 border-gray-950 group-hover:scale-125 transition-transform glow-cyan"></div>
+                    <div class="glass-card p-6 rounded-2xl border border-gray-800 space-y-2">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <h3 class="text-xl font-bold text-white">Data Analyst Trainee</h3>
+                            <span class="px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 text-xs font-semibold">Practical Training</span>
+                        </div>
+                        <p class="text-sm font-medium text-cyan-400">Data Analytics & Business Intelligence</p>
+                        <p class="text-sm text-gray-300 leading-relaxed pt-1">
+                            Hands-on training focused on raw data extraction, cleaning, statistical analysis, Python data processing scripts, and interactive Power BI dashboard creation.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Academic Education -->
+                <div class="relative group">
+                    <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-5 h-5 rounded-full bg-blue-500 border-4 border-gray-950 group-hover:scale-125 transition-transform"></div>
+                    <div class="glass-card p-6 rounded-2xl border border-gray-800 space-y-2">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <h3 class="text-xl font-bold text-white">Faculty of Computing and Data Science</h3>
+                            <span class="px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/30 text-xs font-semibold">Third-Year Student</span>
+                        </div>
+                        <p class="text-sm font-medium text-gray-400">Undergraduate Degree Studies</p>
+                        <p class="text-sm text-gray-300 leading-relaxed pt-1">
+                            Building a robust theoretical and practical foundation in computer science principles, database management systems, data science algorithms, and software engineering concepts.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Hire CTA Section -->
+    <section class="py-16 bg-gradient-to-r from-gray-950 via-cyan-950/30 to-gray-950 border-t border-gray-800">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-8">
+            <div class="space-y-3">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Have a Project in Mind?</h2>
+                <p class="text-gray-300 text-base max-w-xl mx-auto">
+                    Whether you need a custom Power BI dashboard, comprehensive manual software testing, or reliable data entry/translation—I'm ready to assist.
+                </p>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-4 items-center">
+                <a href="https://wa.me/201276286768" target="_blank" class="px-8 py-4 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-bold text-base hover:opacity-95 transition-all glow-green flex items-center gap-3">
+                    <i class="fab fa-whatsapp text-2xl"></i>
+                    <span>Contact on WhatsApp (+201276286768)</span>
+                </a>
+
+                <a href="https://www.linkedin.com/in/abdelrahman-mohamed-391508357" target="_blank" class="px-8 py-4 rounded-xl glass-card text-white font-bold text-base hover:bg-gray-800/80 transition-all border border-gray-700 flex items-center gap-3">
+                    <i class="fab fa-linkedin text-2xl text-cyan-400"></i>
+                    <span>Connect on LinkedIn</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-gray-900 bg-gray-950">
+        <div class="max-w-7xl mx-auto px-4 text-center sm:flex sm:justify-between sm:items-center text-xs text-gray-500 space-y-4 sm:space-y-0">
+            <div>
+                <span class="text-white font-semibold">Abdelrahman Mohamed</span> • Data Analyst & Software Tester
+            </div>
+            <div class="flex justify-center space-x-6 text-base text-gray-400">
+                <a href="https://wa.me/201276286768" target="_blank" class="hover:text-emerald-400 transition-colors" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://www.linkedin.com/in/abdelrahman-mohamed-391508357" target="_blank" class="hover:text-cyan-400 transition-colors" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        // Project Filter Logic
+        function filterProjects(category) {
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const projectCards = document.querySelectorAll('.project-card');
+
+            // Reset tab styles
+            tabBtns.forEach(btn => {
+                btn.classList.remove('active', 'bg-gradient-to-r', 'from-cyan-500', 'to-blue-600', 'text-white', 'shadow-md');
+                btn.classList.add('text-gray-400');
+            });
+
+            // Set active tab
+            const activeTab = document.getElementById(`tab-${category}`);
+            if (activeTab) {
+                activeTab.classList.add('active', 'bg-gradient-to-r', 'from-cyan-500', 'to-blue-600', 'text-white', 'shadow-md');
+                activeTab.classList.remove('text-gray-400');
+            }
+
+            // Filter cards
+            projectCards.forEach(card => {
+                if (category === 'all') {
+                    card.style.display = 'flex';
+                } else if (category === 'data') {
+                    card.style.display = card.classList.contains('data-project') ? 'flex' : 'none';
+                } else if (category === 'qa') {
+                    card.style.display = card.classList.contains('qa-project') ? 'flex' : 'none';
+                }
+            });
+        }
+
+        // Copy to clipboard notification
+        function copyToClipboard(text, message) {
+            const el = document.createElement('textarea');
+            el.value = text;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-msg');
+            toastMsg.innerText = message || 'Copied to clipboard!';
+            
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        // Mobile Nav Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+    </script>
+</body>
+</html>
